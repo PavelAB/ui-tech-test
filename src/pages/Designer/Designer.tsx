@@ -8,10 +8,15 @@ import { useMode } from '../../components/ModeSwitch';
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch';
 import Aside from '../../components/Aside';
 
+
 export default function Designer() {
     const { fields, } = useFields();
+
+
     const [mode] = useMode();
 
+
+    
     return (
         <div className='h-screen w-screen flex items-stretch'>
             <main className='max-w-xl mx-auto mt-10 grow'>
