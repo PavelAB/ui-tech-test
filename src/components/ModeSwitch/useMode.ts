@@ -8,6 +8,7 @@ export default function useMode(): [Mode, () => void] {
     
     let [searchParams, setSearchParams] = useSearchParams()
 
+    //TODO Understand at which point the parameter was added, and verify the behavior with useEffect to have the ability to navigate using buttons, and comprehend where the update error comes from.
     const getInitialMode = (): Mode => {            
         return searchParams.get('mode') === 'edit' ? 'edit' : 'preview'
     };
