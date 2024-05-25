@@ -7,15 +7,16 @@ import { Form } from 'react-router-dom';
 import { useMode } from '../../components/ModeSwitch';
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch';
 import Aside from '../../components/Aside';
+import { useCallback } from 'react';
+import { useSelection } from '../../components/SelectionManager'
 
 
 export default function Designer() {
-    const { fields, } = useFields();
+    const { fields, } = useFields()
 
 
-    const [mode] = useMode();
-
-
+    const [mode] = useMode()
+    
     
     return (
         <div className='h-screen w-screen flex items-stretch'>
@@ -36,9 +37,9 @@ export default function Designer() {
                             case "number":
                             case "text":
                                 return (
-                                    <FieldWrapper id={f.id} key={f.id} >
+                                    <FieldWrapper id={f.id} key={f.id}>
                                         <Label defaultValue={f.label} />
-                                        <InputField {...f as Input} />
+                                        <InputField {...f as Input} onDetails={useSelection} />
                                     </FieldWrapper>
                                 );
                             case "submit":

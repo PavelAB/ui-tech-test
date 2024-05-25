@@ -4,6 +4,7 @@ import useMode from "./useMode"
 
 export default function ModeSwitch() {
     const [mode, toggle] = useMode()
+    
     const enabled = mode == "edit"
     return (
         <div className="flex items-center gap-x-2">

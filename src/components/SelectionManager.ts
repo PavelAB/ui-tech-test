@@ -25,7 +25,6 @@ const selection: SelectionManager = {
         }
     }
 }
-
 /** 
  * This hook returns a tuple of two values:
  * - isSelected: a boolean that is true if the item with the given id is selected
@@ -34,6 +33,8 @@ const selection: SelectionManager = {
  * @returns a tuple of two values: isSelected and getSelection 
  */
 export function useSelection(id: string) {
+    console.log("id", id);
+    
     const [selectedId] = useState<Selection>(selection.value)
     // TODO: subscribe to the selection manager and update the selectedId state when the selection changes
     const getSelection = useCallback(() => {
