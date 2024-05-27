@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
-import useFields, { Input, Submit, Combobox, Field } from "../components/fields/useFields.ts"
-import FieldWrapper from "./fields/FieldWrapper.tsx"
-import ButtonField from '../components/fields/SubmitField';
-import { log } from "console";
+import useFields, {Field } from "../components/fields/useFields.ts"
 
 const fieldName: string[] = ["text", "number", "date", "country", "submit"]
 
