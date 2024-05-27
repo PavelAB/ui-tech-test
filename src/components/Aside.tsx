@@ -25,7 +25,6 @@ function Aside({ children }: { children?: React.ReactNode }) { //Bien comprendre
 
     }, [])
 
-    console.log("======= element", thatField);
     
 
     if (!thatField) {
