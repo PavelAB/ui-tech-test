@@ -34,7 +34,7 @@ const selection: SelectionManager = {
  */
 export function useSelection(id: string) {
     console.log("id", id);
-    
+    console.log("check commit BranchTest")    
     const [selectedId] = useState<Selection>(selection.value)
     // TODO: subscribe to the selection manager and update the selectedId state when the selection changes
     const getSelection = useCallback(() => {
