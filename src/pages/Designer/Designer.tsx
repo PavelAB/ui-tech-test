@@ -19,9 +19,7 @@ export default function Designer() {
     const [mode] = useMode()
     
 
-    const handliID = (id: string) => {
-        console.log("idFromChild", id)
-        
+    const handleID = (id: string) => {
         setFieldId(id)
     }
     
@@ -46,7 +44,7 @@ export default function Designer() {
                                 return (
                                     <FieldWrapper id={f.id} key={f.id}>
                                         <Label defaultValue={f.label} />
-                                        <InputField {...f as Input} onDetails={handliID} />
+                                        <InputField {...f as Input} onDetails={handleID} />
                                     </FieldWrapper>
                                 );
                             case "submit":
