@@ -10,6 +10,8 @@ function InputField({ id, type, placeholder, onDetails }: InputFieldProps) { //R
 
     const [mode] = useMode()
 
+
+
     return (
         <input
             id={id}

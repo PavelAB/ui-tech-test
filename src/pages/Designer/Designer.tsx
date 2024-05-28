@@ -8,14 +8,24 @@ import { useMode } from '../../components/ModeSwitch'
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch'
 import Aside from '../../components/Aside'
 import { useSelection } from '../../components/SelectionManager'
+import { useState } from 'react'
+import { log } from 'console'
 
 
 export default function Designer() {
+
+    const [fieldId, setFieldId] = useState<string | null>(null)
     const { fields, } = useFields()
 
 
     const [mode] = useMode()
     
+
+    const handliID = (id: string) => {
+        console.log("idFromChild", id)
+        
+        setFieldId(id)
+    }
     
     return (
         <div className='h-screen w-screen flex items-stretch'>
@@ -38,7 +48,7 @@ export default function Designer() {
                                 return (
                                     <FieldWrapper id={f.id} key={f.id}>
                                         <Label defaultValue={f.label} />
-                                        <InputField {...f as Input} onDetails={useSelection} />
+                                        <InputField {...f as Input} onDetails={handliID} />
                                     </FieldWrapper>
                                 );
                             case "submit":
@@ -84,7 +94,7 @@ export default function Designer() {
                     )}
                 </Form>
             </main>
-            <Aside />
+            <Aside children={fieldId}/>
         </div >
     );
 }
