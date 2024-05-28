@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import useFields, {Field } from "../components/fields/useFields.ts"
-import { log } from "console"
 
 const fieldName: string[] = ["text", "number", "date", "country", "submit"]
 
@@ -23,9 +22,6 @@ function Aside({ children }: { children?: React.ReactNode }) {
         setThatField(permField)
 
     }, [children])
-
-    
-    console.log("==>", thatField?.type);
     
 
 
@@ -43,9 +39,16 @@ function Aside({ children }: { children?: React.ReactNode }) {
         )
     }
 
-    const handleSubmit = (event: any) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log("Submitted value", event.target.target)
+        const form = event.currentTarget
+        
+        const formData = {
+                type: (form.elements[0] as HTMLInputElement).value,
+                message: (form.elements[1] as HTMLInputElement).value,
+                label: (form.elements[2] as HTMLInputElement).value
+            }
+        console.log("Submitted value", formData)
         
     }
     // Preremplir la formulaire

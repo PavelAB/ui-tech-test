@@ -7,9 +7,7 @@ import { Form } from 'react-router-dom'
 import { useMode } from '../../components/ModeSwitch'
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch'
 import Aside from '../../components/Aside'
-import { useSelection } from '../../components/SelectionManager'
 import { useState } from 'react'
-import { log } from 'console'
 
 
 export default function Designer() {
