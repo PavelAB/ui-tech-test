@@ -2,8 +2,9 @@ import { useMode } from "../ModeSwitch";
 import { Field, Input } from "./useFields";
 type InputFieldProps = Input & {
     update?: (data: Partial<Field>) => void
+    onDetails: (id: string) => void
 }
-function InputField({ id, type, placeholder }: InputFieldProps) {
+function InputField({ id, type, placeholder, onDetails }: InputFieldProps) {
     const [mode] = useMode()
     return (
         <input
