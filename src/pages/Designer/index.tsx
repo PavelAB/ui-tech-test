@@ -1,1 +1,1 @@
-export { default } from './Designer';  //a qquoi sert cette composante
+export { default } from './Designer'

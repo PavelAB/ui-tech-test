@@ -38,7 +38,7 @@ export default function Designer() {
                                 return (
                                     <FieldWrapper id={f.id} key={f.id}>
                                         <Label defaultValue={f.label} />
-                                        <InputField {...f as Input} onDetails={useSelection} />
+                                        <InputField {...f as Input}/>
                                     </FieldWrapper>
                                 );
                             case "submit":
