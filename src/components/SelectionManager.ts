@@ -1,4 +1,5 @@
-import { useCallback, useState } from "react"
+import { unsubscribe } from "diagnostics_channel"
+import { useCallback, useEffect, useState } from "react"
 
 /**
  * This is a simple selection manager that allows you to select one of many items.
@@ -33,12 +34,21 @@ const selection: SelectionManager = {
  * @returns a tuple of two values: isSelected and getSelection 
  */
 export function useSelection(id: string) {
-    console.log("id", id);
-    
-    const [selectedId] = useState<Selection>(selection.value)
+    const [selectedId, setSelectedId] = useState<Selection>(selection.value)
     // TODO: subscribe to the selection manager and update the selectedId state when the selection changes
+
+    useEffect(() => {
+        const handleSelectChange = (newSelection: Selection) => {
+            setSelectedId(newSelection)
+        }
+
+        const unsubscribe = selection.subscribe(handleSelectChange)
+
+        return () => unsubscribe()
+    }, [])
     const getSelection = useCallback(() => {
-        // TODO: implement this function
+        selection.value = id
+        selection.subscribers.forEach(sub => sub(selection.value))
     }, [])
 
     const isSelected = selectedId === id

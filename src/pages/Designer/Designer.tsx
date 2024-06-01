@@ -7,7 +7,6 @@ import { Form } from 'react-router-dom'
 import { useMode } from '../../components/ModeSwitch'
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch'
 import Aside from '../../components/Aside'
-import { useSelection } from '../../components/SelectionManager'
 
 
 export default function Designer() {
@@ -40,12 +39,13 @@ export default function Designer() {
                                         <Label defaultValue={f.label} />
                                         <InputField {...f as Input}/>
                                     </FieldWrapper>
-                                );
+                                )
                             case "submit":
                                 return (
                                     <FieldWrapper id={f.id} key={f.id} className="mt-4" >
                                         <ButtonField {...f as Submit} />
-                                    </FieldWrapper>);
+                                    </FieldWrapper>
+                                )
                         }
                     })}
                     {/** Add a new field */}
