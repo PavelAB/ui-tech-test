@@ -7,6 +7,7 @@ import { Form } from 'react-router-dom'
 import { useMode } from '../../components/ModeSwitch'
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch'
 import Aside from '../../components/Aside'
+import { useSelection } from '../../components/SelectionManager'
 
 
 export default function Designer() {
@@ -30,25 +31,27 @@ export default function Designer() {
                 >
                     {/** Render the fields based on their type */}
                     {fields.map((f) => {
-                        switch (f.type) {
-                            case "date":
-                            case "number":
-                            case "text":
-                                return (
-                                    <FieldWrapper id={f.id} key={f.id}>
-                                        <Label defaultValue={f.label} />
-                                        <InputField {...f as Input}/>
-                                    </FieldWrapper>
-                                )
-                            case "submit":
-                                return (
-                                    <FieldWrapper id={f.id} key={f.id} className="mt-4" >
-                                        <ButtonField {...f as Submit} />
-                                    </FieldWrapper>
-                                )
-                        }
-                    })}
-                    {/** Add a new field */}
+        const [isSelected, getSelection] = useSelection(f.id)
+        switch (f.type) {
+            case "date":
+            case "number":
+            case "text":
+                return (
+                    <div onClick={getSelection}>
+                        <FieldWrapper id={f.id} key={f.id}>
+                            <Label defaultValue={f.label} />
+                            <InputField {...f as Input}/>
+                        </FieldWrapper>
+                    </div>
+                )
+            case "submit":
+                return (
+                    <FieldWrapper id={f.id} key={f.id} className="mt-4" >
+                        <ButtonField {...f as Submit} />
+                    </FieldWrapper>
+                )
+        }
+    })}{/*Add a new field */}
                     {mode == "edit" && (
                         <fieldset
                             className='mt-4 rounded p-1 ml-12'

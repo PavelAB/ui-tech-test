@@ -46,6 +46,8 @@ export function useSelection(id: string) {
 
         return () => unsubscribe()
     }, [])
+
+    
     const getSelection = useCallback(() => {
         selection.value = id
         selection.subscribers.forEach(sub => sub(selection.value))

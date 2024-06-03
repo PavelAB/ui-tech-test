@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import useFields, {Field } from "../components/fields/useFields.ts"
+import { useSelection } from "./SelectionManager.ts"
 
 const fieldName: string[] = ["text", "number", "date", "country", "submit"]
 
@@ -8,23 +9,16 @@ function Aside({ children }: { children?: React.ReactNode }) { //Bien comprendre
     const [thatField, setThatField] = useState<Field>() //oublie les const, il faut utiliser les states
     //COmprendre comment faire passer l'id 
     const { fields } = useFields()
-    const IDFormFieldSelect: string = fields[1].id
-    console.log(fields[2]);
+    const selectedField = fields.map(field => {
+        const [isSelected] = useSelection(field.id)
+        return isSelected ? field : null
+    }).filter(Boolean)[0]
 
     
-
-    useEffect(() => {
-        // Je dois l'acceder au champ de la formulaire pour preremplir les donnes de ma nouvelle formulaire qui va modifier les proprietes de mon champ
-        console.log("=== ID ", IDFormFieldSelect);
-
-        setThatField(fields.filter(item =>  // essayer le slice
-            item.id === IDFormFieldSelect)[0])
-
-    }, [])
-
+    console.log('selected Field =====> ',selectedField)
     
 
-    if (!thatField) {
+    if (!selectedField) {
 
         return (
             <aside
@@ -38,6 +32,7 @@ function Aside({ children }: { children?: React.ReactNode }) { //Bien comprendre
         )
     }
     // Preremplir la formulaire
+    
     return (
         <aside
             className="h-full border-l border-gray-200 w-1/6 px-4 py-10"
@@ -48,7 +43,7 @@ function Aside({ children }: { children?: React.ReactNode }) { //Bien comprendre
             <form action="" >
                 <div >
                     <label htmlFor="">Entry type your submit </label>
-                    <select name="" id="" className={"mt-1 rounded border w-full border-gray-200 text-base font-medium px-3 py-2"}>
+                    <select name="" id="" value={selectedField.type} className={"mt-1 rounded border w-full border-gray-200 text-base font-medium px-3 py-2"}>
                         {fieldName.map(item => (
                             <option >{item}</option>
                         ))}
@@ -58,14 +53,14 @@ function Aside({ children }: { children?: React.ReactNode }) { //Bien comprendre
                     <label htmlFor="">Entry your message</label>
                     <input 
                         type="text" 
-                        placeholder={thatField.placeholder? thatField.placeholder : " "}
+                        placeholder={selectedField.placeholder? selectedField.placeholder : " "}
                         className={"mt-1 rounded border w-full border-gray-200 text-base font-medium px-3 py-2 placeholder:font-normal"}/>
                 </div>
                 <div>
                     <label htmlFor="">Entry your label</label>
                     <input 
                         type="text" 
-                        placeholder={thatField.label? thatField.label : " "}
+                        placeholder={selectedField.label? selectedField.label : " "}
                         className={" mt-1 rounded border w-full border-gray-200 text-base font-medium px-3 py-2 placeholder:font-normal"}/>
                 </div>
                 

@@ -1,5 +1,5 @@
-import { useMode } from "../ModeSwitch";
-import { Field, Input } from "./useFields";
+import { useMode } from "../ModeSwitch"
+import { Field, Input } from "./useFields"
 
 type InputFieldProps = Input & {
     update?: (data: Partial<Field>) => void
