@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react"
-import useFields, {Field } from "../components/fields/useFields.ts"
+import useFields from "../components/fields/useFields.ts"
 import { useSelection } from "./SelectionManager.ts"
 
 const fieldName: string[] = ["text", "number", "date", "country", "submit"]
 
 
 function Aside({ children }: { children?: React.ReactNode }) { //Bien comprendre la notion children
-    const [thatField, setThatField] = useState<Field>() //oublie les const, il faut utiliser les states
     //COmprendre comment faire passer l'id 
     const { fields } = useFields()
     const selectedField = fields.map(field => {

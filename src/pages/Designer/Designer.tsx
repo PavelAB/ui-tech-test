@@ -15,8 +15,8 @@ export default function Designer() {
 
 
     const [mode] = useMode()
-    
-    
+
+
     return (
         <div className='h-screen w-screen flex items-stretch'>
             <main className='max-w-xl mx-auto mt-10 grow'>
@@ -31,27 +31,27 @@ export default function Designer() {
                 >
                     {/** Render the fields based on their type */}
                     {fields.map((f) => {
-        const [isSelected, getSelection] = useSelection(f.id)
-        switch (f.type) {
-            case "date":
-            case "number":
-            case "text":
-                return (
-                    <div onClick={getSelection}>
-                        <FieldWrapper id={f.id} key={f.id}>
-                            <Label defaultValue={f.label} />
-                            <InputField {...f as Input}/>
-                        </FieldWrapper>
-                    </div>
-                )
-            case "submit":
-                return (
-                    <FieldWrapper id={f.id} key={f.id} className="mt-4" >
-                        <ButtonField {...f as Submit} />
-                    </FieldWrapper>
-                )
-        }
-    })}{/*Add a new field */}
+                        const [isSelected, getSelection] = useSelection(f.id)
+                        switch (f.type) {
+                            case "date":
+                            case "number":
+                            case "text":
+                                return (
+                                    <div onClick={getSelection}>
+                                        <FieldWrapper id={f.id} key={f.id}>
+                                            <Label defaultValue={f.label} />
+                                            <InputField {...f as Input} />
+                                        </FieldWrapper>
+                                    </div>
+                                )
+                            case "submit":
+                                return (
+                                    <FieldWrapper id={f.id} key={f.id} className="mt-4" >
+                                        <ButtonField {...f as Submit} />
+                                    </FieldWrapper>
+                                )
+                        }
+                    })}{/*Add a new field */}
                     {mode == "edit" && (
                         <fieldset
                             className='mt-4 rounded p-1 ml-12'
