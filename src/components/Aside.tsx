@@ -27,8 +27,7 @@ function Aside({ children }: { children?: React.ReactNode }) {
             
     }, [selectedField])
     
-    console.log(selectedField);
-    
+    // TODO Consider adding another useEffect to send data without using the 'Submit' button
 
     if (!selectedField) {
 
@@ -62,6 +61,7 @@ function Aside({ children }: { children?: React.ReactNode }) {
         
         setValueMessage('')
         setValueLabel('')
+        console.log("Submited data ==> ", formData)
         
     }
     

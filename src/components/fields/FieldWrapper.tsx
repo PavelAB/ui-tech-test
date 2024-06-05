@@ -4,8 +4,8 @@ import React from "react"
 import { useMode } from "../ModeSwitch"
 
 
-function FieldWrapper({ children, className, onRemove, ...props }: React.HTMLAttributes<HTMLDivElement> & { id: string, onRemove?: () => void }) { // je ne comprend pas la notion children, revoir cela et j'ai oublier a quoi correspond ...props,
-    const [mode] = useMode()  //Custom Hook ecrire le type de retour
+function FieldWrapper({ children, className, onRemove, ...props }: React.HTMLAttributes<HTMLDivElement> & { id: string, onRemove?: () => void }) {
+    const [mode] = useMode()
     const isEditable = mode == "edit"
     
     return (
