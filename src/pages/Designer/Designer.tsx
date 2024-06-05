@@ -37,7 +37,7 @@ export default function Designer() {
                             case "number":
                             case "text":
                                 return (
-                                    <div onClick={getSelection}>
+                                    <div key={f.id} onClick={getSelection}>
                                         <FieldWrapper id={f.id} key={f.id}>
                                             <Label defaultValue={f.label} />
                                             <InputField {...f as Input} />

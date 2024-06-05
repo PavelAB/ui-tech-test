@@ -37,13 +37,15 @@ export function useSelection(id: string) {
     const [selectedId, setSelectedId] = useState<Selection>(selection.value)
     // TODO: subscribe to the selection manager and update the selectedId state when the selection changes
 
+
+
     useEffect(() => {
         const handleSelectChange = (newSelection: Selection) => {
             setSelectedId(newSelection)
         }
 
         const unsubscribe = selection.subscribe(handleSelectChange)
-
+        
         return () => unsubscribe()
     }, [])
 
