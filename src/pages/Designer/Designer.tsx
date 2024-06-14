@@ -1,7 +1,7 @@
 import InputField from '../../components/fields/InputField'
 import ButtonField from '../../components/fields/SubmitField'
 import Label from '../../components/fields/Label'
-import useFields, { Submit, Input } from '../../components/fields/useFields'
+import useStore, { Submit, Input} from '../../components/fields/useFields'
 import FieldWrapper from '../../components/fields/FieldWrapper'
 import { Form } from 'react-router-dom'
 import { useMode } from '../../components/ModeSwitch'
@@ -11,9 +11,9 @@ import { useSelection } from '../../components/SelectionManager'
 
 
 export default function Designer() {
-    const { fields, } = useFields()
-
-
+    //const { fields } = useFields()
+    const fields = useStore((state) => state.fields)
+    
     const [mode] = useMode()
 
 

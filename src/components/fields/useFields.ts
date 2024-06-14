@@ -1,4 +1,5 @@
 import { v4 } from "uuid"
+import { create } from "zustand"
 
 export type Submit = {
     type: "submit",
@@ -35,10 +36,24 @@ const INIT_FIELDS: Field[] = [
     { type: "submit", text: "submit", id: generateRandomUUID() }
 ]
 
+interface BearState {
+    fields: Field[]
+}
+interface Action {
+    updateField: (fields: Partial<Field>, id: string) => void
+}
 /**
  * A store for managing form fields
  * TODO: implement a store for managing form fields
  **/
+const useStore = create<BearState & Action>()((set) => ({
+    fields: INIT_FIELDS,
+    updateField: (updateFields, id) => set((state) => ({
+        fields: state.fields.map((field: any) => 
+            field.id === id ? {...field, ...updateFields} : field
+        )
+    }))
+}))
 
 
 /**
@@ -46,9 +61,9 @@ const INIT_FIELDS: Field[] = [
  * TODO: complete this hook by wiring up the form store
  * @returns 
  */
-function useFields() {
+// function useFields() {
 
-    return { fields: INIT_FIELDS, }
-}
+//     return { fields: INIT_FIELDS, }
+// }
 
-export default useFields;
+export default useStore

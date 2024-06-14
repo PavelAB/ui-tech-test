@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react"
-import useFields from "../components/fields/useFields.ts"
+import useStore, { Field } from "../components/fields/useFields.ts"
 import { useSelection } from "./SelectionManager.ts"
 
 const fieldName: string[] = ["text", "number", "date", "country", "submit"]
 
 
 function Aside({ children }: { children?: React.ReactNode }) { 
+
+    const fields = useStore((state) => state.fields)
+    const updateField = useStore((state) => state.updateField)
     
-    const { fields } = useFields()
 
     const [valueSelect, setValueSelect] = useState<string>('')
     const [valueMessage, setValueMessage] = useState<string>('')
@@ -26,7 +28,7 @@ function Aside({ children }: { children?: React.ReactNode }) {
         }
             
     }, [selectedField])
-    
+
     // TODO Consider adding another useEffect to send data without using the 'Submit' button
 
     if (!selectedField) {
@@ -52,16 +54,16 @@ function Aside({ children }: { children?: React.ReactNode }) {
         event.preventDefault()
         const form = event.currentTarget
         
-        const formData = {
-                type: (form.elements[0] as HTMLInputElement).value,
-                message: (form.elements[1] as HTMLInputElement).value,
+        const formData: Partial<Field> = {
+                type: (form.elements[0] as HTMLInputElement).value as any, // TODO remove <any> type
+                placeholder: (form.elements[1] as HTMLInputElement).value,
                 label: (form.elements[2] as HTMLInputElement).value
             }
 
         
         setValueMessage('')
         setValueLabel('')
-        console.log("Submited data ==> ", formData)
+        updateField(formData, selectedField.id)
         
     }
     
