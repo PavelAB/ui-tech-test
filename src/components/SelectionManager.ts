@@ -34,6 +34,7 @@ const selection: SelectionManager = {
  * @returns a tuple of two values: isSelected and getSelection 
  */
 export function useSelection(id: string) {
+    console.log("before State -> selection.value -> ", selection.value, selection.subscribers.length)
     const [selectedId, setSelectedId] = useState<Selection>(selection.value)
     // TODO: subscribe to the selection manager and update the selectedId state when the selection changes
 
@@ -41,6 +42,8 @@ export function useSelection(id: string) {
 
     useEffect(() => {
         const handleSelectChange = (newSelection: Selection) => {
+            console.log("newSelection :::> ", newSelection)
+            console.log("SelectionsSubscribers[] :::>", selection.subscribers)
             setSelectedId(newSelection)
         }
 
@@ -52,6 +55,7 @@ export function useSelection(id: string) {
 
     const getSelection = useCallback(() => {
         selection.value = id
+        console.log("selection ------>", selection)
         selection.subscribers.forEach(sub => sub(selection.value))
     }, [])
 

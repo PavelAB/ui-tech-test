@@ -41,6 +41,8 @@ interface BearState {
 }
 interface Action {
     updateField: (fields: Partial<Field>, id: string) => void
+    newField: () => void
+    deleteField: (id: string) => void
 }
 /**
  * A store for managing form fields
@@ -51,6 +53,14 @@ const useStore = create<BearState & Action>()((set) => ({
     updateField: (updateFields, id) => set((state) => ({
         fields: state.fields.map((field: any) => 
             field.id === id ? {...field, ...updateFields} : field
+        )
+    })),
+    newField: () => set((state) => ({
+        fields: [ ...state.fields, { type: "text", placeholder: "Placeholder", label: null, id: generateRandomUUID() }]
+    })),
+    deleteField: (id) => set((state) => ({
+        fields: state.fields.filter((field: any) => 
+            field.id !== id
         )
     }))
 }))

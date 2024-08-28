@@ -13,9 +13,14 @@ import { useSelection } from '../../components/SelectionManager'
 export default function Designer() {
     //const { fields } = useFields()
     const fields = useStore((state) => state.fields)
-    
+    const deleteField = useStore((state) => state.deleteField)
+
     const [mode] = useMode()
 
+    const handleDelete = (id: string) => {
+        deleteField(id)
+        console.log(" id => ", id)
+    }
 
     return (
         <div className='h-screen w-screen flex items-stretch'>
@@ -32,13 +37,15 @@ export default function Designer() {
                     {/** Render the fields based on their type */}
                     {fields.map((f) => {
                         const [isSelected, getSelection] = useSelection(f.id)
+                        console.log("isSelected in Designer :::::>>", isSelected, "and f.id :::>", f.id)
+                        
                         switch (f.type) {
                             case "date":
                             case "number":
                             case "text":
                                 return (
                                     <div key={f.id} onClick={getSelection}>
-                                        <FieldWrapper id={f.id} key={f.id}>
+                                        <FieldWrapper id={f.id} key={f.id} onRemove={() => handleDelete(f.id)}>
                                             <Label defaultValue={f.label} />
                                             <InputField {...f as Input} />
                                         </FieldWrapper>
