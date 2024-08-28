@@ -19,7 +19,6 @@ export default function Designer() {
 
     const handleDelete = (id: string) => {
         deleteField(id)
-        console.log(" id => ", id)
     }
 
     return (
@@ -37,7 +36,6 @@ export default function Designer() {
                     {/** Render the fields based on their type */}
                     {fields.map((f) => {
                         const [isSelected, getSelection] = useSelection(f.id)
-                        console.log("isSelected in Designer :::::>>", isSelected, "and f.id :::>", f.id)
                         
                         switch (f.type) {
                             case "date":

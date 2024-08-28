@@ -17,7 +17,6 @@ function Aside({ children }: { children?: React.ReactNode }) {
 
     const selectedField = fields.map(field => {
         const [isSelected] = useSelection(field.id)
-        console.log("isSelected in Aside :::::>>", isSelected, "and f.id :::>", field.id)
         return isSelected ? field : null
     }).filter(Boolean)[0]
 
